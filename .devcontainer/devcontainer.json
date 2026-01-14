@@ -1,0 +1,40 @@
+{
+	"name": "Android Dev",
+	"image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
+	"features": {
+		// Use JDK 17 (Safest for Android) or 21. 
+		// "ms" distro is better optimized for VS Code/Codespaces than Oracle.
+		"ghcr.io/devcontainers/features/java:1": {
+			"version": "17",
+			"jdkDistro": "ms",
+			"installGradle": true,
+			"installMaven": false,
+			"installAnt": false
+		},
+		// A more standard community feature for Android
+		"ghcr.io/devcontainers-contrib/features/android-sdk:latest": {
+			"platformVersions": "34",
+			"buildToolsVersions": "34.0.0",
+			"cmdLineToolsVersion": "latest",
+			"emulatorVersion": "none", 
+			"acceptSdkLicenses": true
+		}
+	},
+	// Essential extensions for Android/Kotlin development
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"fwcd.kotlin",
+				"vscjava.vscode-java-pack",
+				"mathiasfrohlich.Kotlin"
+			]
+		}
+	},
+	// 5037 is the ADB server port, 8888 is often used for local servers
+	"forwardPorts": [5037, 8888],
+	"remoteUser": "vscode",
+    // Android builds are memory hungry; increase limits if possible
+    "containerEnv": {
+        "_JAVA_OPTIONS": "-Xmx4g"
+    }
+}
