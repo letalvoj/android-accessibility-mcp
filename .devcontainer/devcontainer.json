@@ -1,47 +1,40 @@
 {
-	"name": "Android Dev",
+	"name": "Android Dev (Stable)",
 	"image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
 	"features": {
-		// Use JDK 17 (Safest for Android) or 21. 
-		// "ms" distro is better optimized for VS Code/Codespaces than Oracle.
+		// Java 17 is required for modern Android builds
 		"ghcr.io/devcontainers/features/java:1": {
 			"version": "17",
 			"jdkDistro": "ms",
-			"installGradle": true,
-			"installMaven": false,
-			"installAnt": false
+			"installGradle": true
 		},
-		// A more standard community feature for Android
-		"ghcr.io/devcontainers-contrib/features/android-sdk:latest": {
-			"platformVersions": "34",
-			"buildToolsVersions": "34.0.0",
+		// SWITCHED: This is the stable mobile-devcontainers source
+		"ghcr.io/mobile-devcontainers/features/android:1": {
+			"version": "latest",
 			"cmdLineToolsVersion": "latest",
-			"emulatorVersion": "none", 
 			"acceptSdkLicenses": true
 		},
-		// Add Node.js (Required for Gemini CLI) <---
+		// Node.js (Required for Gemini CLI)
 		"ghcr.io/devcontainers/features/node:1": {
 			"version": "lts"
 		}
 	},
-	// Essential extensions for Android/Kotlin development
+	// Installs Gemini CLI automatically after the container builds
+	"postCreateCommand": "npm install -g @google/gemini-cli",
+
 	"customizations": {
 		"vscode": {
 			"extensions": [
 				"fwcd.kotlin",
 				"vscjava.vscode-java-pack",
-				"mathiasfrohlich.Kotlin",
-				"Google.gemini-code-assist"
+				"mathiasfrohlich.Kotlin"
 			]
 		}
 	},
-	// Install Gemini CLI
-	"postCreateCommand": "npm install -g @google/gemini-cli",
-	// 5037 is the ADB server port, 8888 is often used for local servers
+	// Port 5037 is vital for ADB (Android Debug Bridge)
 	"forwardPorts": [5037, 8888],
 	"remoteUser": "vscode",
-    // Android builds are memory hungry; increase limits if possible
-    "containerEnv": {
-        "_JAVA_OPTIONS": "-Xmx4g"
-    }
+	"containerEnv": {
+		"_JAVA_OPTIONS": "-Xmx4g"
+	}
 }
