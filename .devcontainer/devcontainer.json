@@ -18,6 +18,10 @@
 			"cmdLineToolsVersion": "latest",
 			"emulatorVersion": "none", 
 			"acceptSdkLicenses": true
+		},
+		// Add Node.js (Required for Gemini CLI) <---
+		"ghcr.io/devcontainers/features/node:1": {
+			"version": "lts"
 		}
 	},
 	// Essential extensions for Android/Kotlin development
@@ -26,10 +30,13 @@
 			"extensions": [
 				"fwcd.kotlin",
 				"vscjava.vscode-java-pack",
-				"mathiasfrohlich.Kotlin"
+				"mathiasfrohlich.Kotlin",
+				"Google.gemini-code-assist"
 			]
 		}
 	},
+	// Install Gemini CLI
+	"postCreateCommand": "npm install -g @google/gemini-cli",
 	// 5037 is the ADB server port, 8888 is often used for local servers
 	"forwardPorts": [5037, 8888],
 	"remoteUser": "vscode",
