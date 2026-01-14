@@ -2,18 +2,7 @@
 	"name": "Android Dev (Stable)",
 	"image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
 	"features": {
-		// Java 17 is required for modern Android builds
-		"ghcr.io/devcontainers/features/java:1": {
-			"version": "17",
-			"jdkDistro": "ms",
-			"installGradle": true
-		},
-		// SWITCHED: This is the stable mobile-devcontainers source
-		"ghcr.io/mobile-devcontainers/features/android:1": {
-			"version": "latest",
-			"cmdLineToolsVersion": "latest",
-			"acceptSdkLicenses": true
-		},
+		"ghcr.io/nordcominc/devcontainer-features/android-sdk:1": {},
 		// Node.js (Required for Gemini CLI)
 		"ghcr.io/devcontainers/features/node:1": {
 			"version": "lts"
